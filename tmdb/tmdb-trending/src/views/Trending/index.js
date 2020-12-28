@@ -124,7 +124,7 @@ export default function CenteredGrid() {
               <Grid item xs={3} style={{marginTop: '20px'}}>
                 <Card className={classes.root} key={dados.id}
                   style={{backgroundColor: handleColorNota(dados.vote_average)}}>
-                  <CardActionArea>
+                  <CardActionArea onClick={handleOpenModal}>
                     <CardMedia
                       className={classes.media}
                       image={formatImage(dados.poster_path)}
@@ -142,6 +142,43 @@ export default function CenteredGrid() {
                       </Typography>
                     </CardContent>
                   </CardActionArea>
+                  <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                    open={open}
+                    onClose={handleCloseModal}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                      timeout: 500,
+                    }}
+                    dadosFilmes={dadosFilmes}
+                >
+                  <Fade in={open} key={dados.id}>
+                    <div className={classes.paper}>
+                        <Grid container spacing={3}>
+                          <Grid item xs={6}>
+                            <Typography component="h5" variant="h5">
+                              {dados.title}
+                            </Typography>
+                            <Typography component="h6" variant="h6">
+                              Sinopse: {dados.overview}
+                            </Typography>
+                            <Typography variant="subtitle1" color="textSecondary">
+                              Nota: {dados.vote_average}
+                            </Typography>
+                            <Typography variant="subtitle1" color="textSecondary">
+                              Total de Votos: {dados.vote_count}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <img className={classes.media} src={formatImage(dados.poster_path)} alt={dados.title}/>
+                          </Grid>
+                        </Grid>
+                      </div>
+                    </Fade>
+                  </Modal>
                 </Card>
               </Grid>
             );}
