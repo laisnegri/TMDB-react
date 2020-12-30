@@ -34,4 +34,7 @@ export const useStyles = makeStyles((theme) => ({
     media: {
       height: '450px',
     },
+    imagemModal: {
+      height: '550px',
+    }
 }));
